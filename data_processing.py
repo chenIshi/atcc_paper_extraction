@@ -1,17 +1,16 @@
 import json
 import string
 
-"""import ibm watson api"""
+# import ibm watson api
 from watson_developer_cloud import NaturalLanguageUnderstandingV1
 from watson_developer_cloud.natural_language_understanding_v1 import Features, EntitiesOptions, KeywordsOptions
 
-"""import nltk"""
+# import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.probability import FreqDist
-
-"""import matlabplot visualization"""
+from nltk.corpus import wordnet
 
 
 paper = open('maas-ismm12-gpugc.txt','r')
@@ -45,12 +44,15 @@ for token in tokens:
         
 
 fdist = FreqDist(word.lower() for word in clean_tokens)
+
+print(fdist.most_common(20))
+
+
 """
 for key, val in fdist.items():
     print(str(key) + ':' + str(val))
 """
-
-fdist.plot(20, cumulative=False)
+# fdist.plot(20, cumulative=False)
 
 """
 nlu = NaturalLanguageUnderstandingV1(
